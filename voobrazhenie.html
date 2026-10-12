@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Воображение — Кейтаро Кимура</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&text=%E6%9A%81%E6%83%B3&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-night: #0B1220;
+    --panel: #1A2740;
+    --panel-line: #253352;
+    --ink: #E8ECF2;
+    --ink-soft: #8FA3BF;
+    /* Unique to "Воображение" — rose/plum, not shared with any other work */
+    --accent: #E39FC2;
+    --accent-soft: #B06C8F;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--sky-night);
+    color: var(--ink);
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .horizon {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    z-index: 100;
+    background: linear-gradient(90deg, var(--sky-night) 0%, var(--accent) var(--scroll, 0%), var(--panel-line) var(--scroll, 0%));
+    transition: background 0.1s linear;
+  }
+
+  .backlink {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 90;
+    font-family: 'Noto Serif', 'Noto Serif JP', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+  }
+
+  .backlink:hover { color: var(--accent); }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .story-header {
+    padding: 140px 0 60px;
+    text-align: center;
+  }
+
+  .story-kicker {
+    font-family: 'Noto Serif', 'Noto Serif JP', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+    margin: 0 0 22px;
+  }
+
+  h1.story-title {
+    font-family: 'Noto Serif', 'Noto Serif JP', serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.2;
+    margin: 0 0 18px;
+  }
+
+  .story-byline {
+    font-family: 'Noto Serif', 'Noto Serif JP', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 1rem;
+  }
+
+  .story-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--accent-soft);
+    margin: 40px auto 0;
+  }
+
+  article {
+    padding: 20px 0 100px;
+    font-size: 1.08rem;
+    line-height: 1.95;
+    color: var(--ink);
+  }
+
+  article p {
+    margin: 0 0 28px;
+    text-indent: 2em;
+  }
+
+  article p.dialogue {
+    text-indent: 0;
+    padding-left: 1.4em;
+    position: relative;
+  }
+
+  article p.dialogue::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent-soft);
+  }
+
+  article p:first-of-type {
+    text-indent: 0;
+  }
+
+  article p:first-of-type::first-letter {
+    font-family: 'Noto Serif', 'Noto Serif JP', serif;
+    font-size: 3.4rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.1em 0.08em 0 0;
+    color: var(--accent);
+  }
+
+  .end-mark {
+    text-align: center;
+    margin: 60px 0 0;
+    color: var(--accent-soft);
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+  }
+
+  footer.story-foot {
+    padding: 56px 0 90px;
+    border-top: 1px solid var(--panel-line);
+    text-align: center;
+  }
+
+  .tg-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 12px 26px;
+    border: 1px solid var(--accent-soft);
+    border-radius: 999px;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .tg-link:hover {
+    background: var(--accent);
+    color: var(--sky-night);
+  }
+
+  @media (max-width: 640px) {
+    .story-header { padding: 110px 0 44px; }
+    article { font-size: 1.02rem; line-height: 1.85; }
+    .backlink { top: 16px; left: 16px; font-size: 0.78rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .horizon { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="horizon" id="horizon"></div>
+<a class="backlink" href="index.html">← назад</a>
+
+<header class="story-header">
+  <div class="wrap">
+    <p class="story-kicker">想 · Рассказ</p>
+    <h1 class="story-title">Воображение</h1>
+    <p class="story-byline">Кейтаро Кимура</p>
+    <div class="story-divider"></div>
+  </div>
+</header>
+
+<article>
+  <div class="wrap">
+
+<p>Она лежала на моей груди, лениво водя пальцем по одеялу — не рисуя ничего конкретного, просто чтобы руки были заняты.</p>
+
+<p class="dialogue">Я бы хотела написать книгу, — сказала она куда-то в потолок, не поднимая головы.</p>
+
+<p class="dialogue">О чём?</p>
+
+<p class="dialogue">Это неважно.</p>
+
+<p class="dialogue">То есть как неважно? — я приподнялся на локте, чтобы видеть её лицо.</p>
+
+<p class="dialogue">Я не хочу писать как все, — она пожала плечом, будто сама не до конца понимала, что имеет в виду.</p>
+
+<p class="dialogue">Как хочешь написать ты?</p>
+
+<p>Она не ответила сразу — потянулась, зевнула, и только потом произнесла:</p>
+
+<p class="dialogue">На самом деле я уже пишу.</p>
+
+<p class="dialogue">Так о чём она?</p>
+
+<p class="dialogue">Я не знаю. Не знаю, поймёшь ли ты меня...</p>
+
+<p class="dialogue">Дай мне попробовать.</p>
+
+<p>Она села, скрестив ноги, повернулась ко мне всем корпусом — будто вопрос заслуживал того, чтобы отвечать на него лицом к лицу.</p>
+
+<p class="dialogue">Знаешь, что я больше всего не люблю во всех книгах?</p>
+
+<p class="dialogue">Ммм... — я честно задумался. — Затянутые диалоги?</p>
+
+<p class="dialogue">Не совсем. Но близко. — Она усмехнулась. — Описания. Нудные, никому не нужные описания.</p>
+
+<p class="dialogue">А, ну да, наверное, — я не был до конца уверен, что понимаю разницу, но кивнул.</p>
+
+<p class="dialogue">Какими словами писатели вообще описывают то, что хотят описать?</p>
+
+<p class="dialogue">Эммм... прилагательными?</p>
+
+<p class="dialogue">В точку. Представь книгу без единого прилагательного. Попробуй рассказать мне, что ты делал утром, не используя прилагательных.</p>
+
+<p class="dialogue">Я проснулся в 8. Перекусил онигири. Он был немного сух...</p>
+
+<p class="dialogue">Оп!</p>
+
+<p class="dialogue">Я понял, я понял. Он не содержал достаточно... сочности? Окей.</p>
+
+<p>Она смотрела на меня, явно ожидая продолжения. И я подумал, быть может, она просто ведёт эту беседу, чтоб узнать, чем я был занят этим утром.</p>
+
+<p class="dialogue">Я выпил кофе. Принял душ. Пошёл на работу. Встретил зна... — увидев её поднявшиеся брови, я тут же закончил, — ...комца.</p>
+
+<p>Она рассмеялась.</p>
+
+<p class="dialogue">Это скучно, не находишь? — сказала, всё ещё смеясь.</p>
+
+<p class="dialogue">По тебе не скажешь, — отозвался я, улыбаясь.</p>
+
+<p class="dialogue">Я говорю о том, как ты описывал утро.</p>
+
+<p class="dialogue">Ты лишила меня прилагательных, — чуть ли не с обидой в голосе произнёс я.</p>
+
+<p>Она снова рассмеялась.</p>
+
+<p class="dialogue">Дорогой, я вовсе не хотела задеть твои писательские способности.</p>
+
+<p>Теперь и мне стало смешно.</p>
+
+<p class="dialogue">Окей. Два варианта, как ты бы описал сегодняшнее утро. Первый: «Я проснулся рано утром. Я выпил свежий кофе, съел суховатый онигири. Принял холодный душ и побежал на „любимую“ работу».</p>
+
+<p class="dialogue">Всё-то она обо мне знает.</p>
+
+<p class="dialogue">Вариант второй, — продолжила она, делая вид, будто не заметила. — «Лучи солнца проникали в мою комнату, когда я пробудился ото сна. Моим долгом было испить свежайший кофе, аромат которого разносился по всей квартире. После чего я принялся поедать этот чёртов сухой, словно пустыня, онигири». — Она демонстративно размахивала руками, в то время как я дико смеялся, пытаясь не свалиться с кровати. Она продолжала: — «Холодный душ помог мне пробудиться окончательно, и моё тело было заряжено на весь чёртов день. Переключившись на свою деловую походку, я вышел из дома и направился на свою излюбленную работу...»</p>
+
+<p>Молчание.</p>
+
+<p class="dialogue">Согласна, последнее не смешно. Я пыталась рассмешить тебя ещё больше, но получилось...</p>
+
+<p>Я вновь посмеялся и поцеловал её. Она оттолкнула меня спустя пару мгновений.</p>
+
+<p class="dialogue">Так ты понял, к чему я веду?</p>
+
+<p class="dialogue">Не совсем.</p>
+
+<p class="dialogue">Первый вариант скучный, второй вариант изъезжен, понимаешь? Прочитав первый вариант, читатели оценили бы автора как шарлатана, который даже не пытается использовать какие-либо речевые обороты.</p>
+
+<p class="dialogue">Согласен.</p>
+
+<p class="dialogue">Прочитав второй вариант, бывалый читатель уже не оценит мастерство писателя, принимая такое письмо как должное.</p>
+
+<p class="dialogue">Так чем же будет отличаться твоя книга?</p>
+
+<p class="dialogue">Описывая людей, места, время и вообще что угодно, писатель демонстрирует своё воображение или свой взгляд. Я же хочу показать людям, как они это умеют делать. Хочу, чтобы моя книга была не такой, как все.</p>
+
+<p class="dialogue">Лишив её прилагательных.</p>
+
+<p class="dialogue">Не только прилагательных. Всех частей речи, кроме существительного.</p>
+
+<p>Я был немного в недоумении. Увидев это, она продолжила:</p>
+
+<p class="dialogue">Книги порой лишают нас возможности додумывать самим. Ты представь такой художественный рассказ, прочитав который ты и твой друг, к примеру, получаете разные ощущения. Ведь даже персонажи у каждого из вас являются разными, такими, какими вы додумали их у себя в голове. И как в большинстве случаев бывает, вы и есть ваши персонажи, но теперь по-настоящему.</p>
+
+<div class="end-mark">想</div>
+
+  </div>
+</article>
+
+<footer class="story-foot">
+  <div class="wrap">
+    <a class="tg-link" href="https://t.me/+_HiH-VEV-UIyMGQy" target="_blank" rel="noopener">Обсудить в Telegram →</a>
+  </div>
+</footer>
+
+<script>
+  const horizon = document.getElementById('horizon');
+  function updateHorizon() {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(100, (scrolled / max) * 100) : 0;
+    horizon.style.setProperty('--scroll', pct + '%');
+  }
+  window.addEventListener('scroll', updateHorizon, { passive: true });
+  updateHorizon();
+</script>
+
+</body>
+</html>
